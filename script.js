@@ -2,43 +2,33 @@
    Substitua os valores entre aspas antes de publicar.
    ─────────────────────────────────────────────── */
 const DADOS = {
-  linkWpp: "[LINK_WPP]",          // Ex: "https://wa.me/5511999999999"
-  numeroOab: "[NUMERO_OAB]",      // Ex: "OAB/SP 12345"
-  numeroCpf: "[NUMERO_CPF]",      // Ex: "000.000.000-00"
+  linkWpp: "https://api.whatsapp.com/send/?phone=5543999354464&text&type=phone_number&app_absent=0",
+  numeroOab: "OAB/PR 127.251",
+  numeroCpf: "111.313.049-00",
   nomeCurto: "Beatriz Bortoto",
 
   // ─── Especialidades ──────────────────────────
-  // Cada item: { icon, titulo, descricao (max 250 chars) }
+  // Cada item: { icon, titulo, descricao }
   especialidades: [
     {
-      icon: "👨‍👩‍👧",
-      titulo: "Direito de Família",
-      descricao: "Divórcio, guarda, pensão alimentícia e inventário. Resolvo conflitos familiares com sensibilidade e eficiência, garantindo seus direitos sem desgaste emocional desnecessário."
-    },
-    {
       icon: "⚖️",
-      titulo: "Direito Civil",
-      descricao: "Contratos, cobranças, rescisões e indenizações. Defendo seus interesses em relações civis com estratégia clara e atuação focada no resultado que você precisa."
+      titulo: "Direito Cível",
+      descricao: "Atuo em ações de cobrança, contratos, indenizações por danos morais e materiais, rescisões contratuais, responsabilidade civil e relações de consumo. Analiso cada caso com rigor técnico para identificar a melhor estratégia, buscando acordos vantajosos ou atuando com firmeza no processo judicial quando necessário. Meu objetivo é proteger o seu patrimônio e atuar firmemente para que seus direitos sejam respeitados em todas as relações civis."
     },
     {
-      icon: "🏠",
-      titulo: "Direito Imobiliário",
-      descricao: "Compra, venda, locação e regularização de imóveis. Garanto segurança jurídica em cada etapa da sua transação imobiliária, evitando riscos e prejuízos futuros."
+      icon: "🏛️",
+      titulo: "Direito Previdenciário",
+      descricao: "Especializada em concessão e revisão de benefícios junto ao INSS: aposentadoria por tempo de contribuição, por idade, por invalidez, auxílio-doença, BPC/LOAS e pensão por morte. Recorro de indeferimentos, calculo o melhor momento para requerer seu benefício e combato revisões indevidas. Se o INSS negou ou cortou seu benefício, estou pronta para buscar as vias legais adequadas visando a revisão dessa decisão e a busca pela proteção dos seus direitos previdenciários."
     },
     {
       icon: "💼",
-      titulo: "Direito do Trabalho",
-      descricao: "Verbas rescisórias, assédio, demissão indevida e acordos. Protejo seus direitos trabalhistas com agilidade e expertise, seja você trabalhador ou empresa."
+      titulo: "Direito Trabalhista",
+      descricao: "Defendo trabalhadores e empresas em questões como verbas rescisórias (FGTS, aviso prévio, 13º salário), reconhecimento de vínculo empregatício, assédio moral e sexual no trabalho, horas extras não pagas, adicional de insalubridade/periculosidade e acordos coletivos. Atuo tanto na Justiça do Trabalho quanto em negociações extrajudiciais, sempre com foco em buscar a melhor solução jurídica para o meu cliente, atuando com máxima diligência e dedicação técnica em cada etapa."
     },
     {
       icon: "🛡️",
-      titulo: "Direito do Consumidor",
-      descricao: "Cancelamentos, cobranças indevidas, produtos defeituosos e danos morais. Faço valer seus direitos frente a empresas e prestadores de serviço de forma rápida e eficaz."
-    },
-    {
-      icon: "📜",
-      titulo: "Inventário e Herança",
-      descricao: "Abertura de inventário, partilha de bens e planejamento sucessório. Cuido do processo com cuidado e celeridade para proteger o patrimônio da sua família."
+      titulo: "Direito Criminal",
+      descricao: "Ofereço defesa técnica e humanizada em inquéritos policiais, flagrantes, audiências de custódia e todas as fases do processo penal. Atuo em crimes contra a pessoa, patrimônio, honra, trânsito e entorpecentes, além de crimes cibernéticos. Também oriento vítimas na elaboração de boletins de ocorrência e acompanho ações penais privadas. A sua liberdade e reputação são bens que merecem a mais séria e dedicada proteção jurídica."
     }
   ]
 };
@@ -56,26 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ─── Preenche todos os links e placeholders de dados ─── */
 function applyLinks() {
-  /* Links WhatsApp */
-  document.querySelectorAll('[href="[LINK_WPP]"]').forEach(el => {
-    el.setAttribute("href", DADOS.linkWpp);
-  });
-
-  /* OAB no body texto */
-  document.querySelectorAll('*:not(script):not(style)').forEach(el => {
-    if (el.childNodes.length === 0) return;
-    el.childNodes.forEach(node => {
-      if (node.nodeType === 3) { // text node
-        const txt = node.textContent;
-        if (txt.includes('[NUMERO_OAB]') || txt.includes('[NUMERO_CPF]') || txt.includes('[NOME_ADVOGADA]')) {
-          node.textContent = txt
-            .replace(/\[NUMERO_OAB\]/g, DADOS.numeroOab)
-            .replace(/\[NUMERO_CPF\]/g, DADOS.numeroCpf)
-            .replace(/\[NOME_ADVOGADA\]/g, DADOS.nomeCurto);
-        }
-      }
-    });
-  });
+  // All WPP links are already hardcoded in HTML — nothing to replace here.
+  // This function is kept for future dynamic substitution if needed.
 }
 
 /* ─── Renderiza cards de áreas de atuação ─── */
