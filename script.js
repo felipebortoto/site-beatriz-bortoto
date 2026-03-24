@@ -90,24 +90,40 @@ function initNav() {
   const header = document.getElementById('header');
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
+  const navParent = navLinks.parentNode; // original parent (nav-container)
 
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
+  function openMenu() {
+    document.body.appendChild(navLinks); // move out of header to avoid nested fixed issues
+    navLinks.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    animateHamburger(hamburger, true);
+  }
+
+  function closeMenu() {
+    navLinks.classList.remove('open');
+    navParent.insertBefore(navLinks, hamburger); // return to original position
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    animateHamburger(hamburger, false);
+  }
+
   hamburger.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    animateHamburger(hamburger, isOpen);
+    const isOpen = navLinks.classList.contains('open');
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
   navLinks.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-      animateHamburger(hamburger, false);
+      closeMenu();
     });
   });
 }
