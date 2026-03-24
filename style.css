@@ -1229,7 +1229,7 @@ p {
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
-  z-index: 999;
+  z-index: 1001;
 }
 
 #navLinks.open a {
